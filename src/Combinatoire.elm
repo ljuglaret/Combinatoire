@@ -7,14 +7,14 @@ module Combinatoire exposing (split,choices)
 
 {-|
 -}
-interleave : Int ->  List Int -> List(List Int)
+interleave : a ->  List a -> List(List a)
 interleave x l = 
     case l of 
         [] -> [[x]]
         y::ys -> (x::y::ys)::(List.map ((::)y) (interleave x ys))
 
 {-|-}
-subs :   List Int -> List(List Int)
+subs :   List a -> List(List a)
 subs  l = 
     case l of 
         [] -> [[]]
@@ -23,7 +23,7 @@ subs  l =
 perms[4,1,2]
 [[4,1,2],[1,4,2],[1,2,4],[4,2,1],[2,4,1],[2,1,4]]
 -}
-perms : List Int -> List (List Int ) 
+perms : List a -> List (List a ) 
 perms l = 
     case l of 
         [] -> [[]]
@@ -31,12 +31,12 @@ perms l =
                     List.concatMap (\ll -> interleave y ll )
 
 {-|toutes les combinaisons possibles d'une suite d'entiers-}
-choices : List Int -> List(List Int )
+choices : List a -> List(List a )
 choices l = (subs l) |> 
                 List.concatMap (\ll -> perms ll) 
 
 {-| -}
-split : List Int -> List((List Int ),(List Int ))
+split : List a -> List((List a ),(List a ))
 split l = 
     case l of 
         []    ->  []
