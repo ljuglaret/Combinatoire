@@ -1,8 +1,8 @@
-module Combinatoire exposing (choices)
+module Combinatoire exposing (split,choices)
 {-|
 # Elm.Combinatoire
-## Functions
-@docs  choices
+## Fonctions
+@docs split ,choices 
 -}
 
 {-|
@@ -19,7 +19,10 @@ subs  l =
     case l of 
         [] -> [[]]
         y::ys -> (subs ys)++(List.map ((::)y) (subs ys))
-{-|-}
+{-|
+perms[4,1,2]
+[[4,1,2],[1,4,2],[1,2,4],[4,2,1],[2,4,1],[2,1,4]]
+-}
 perms : List Int -> List (List Int ) 
 perms l = 
     case l of 
@@ -32,7 +35,7 @@ choices : List Int -> List(List Int )
 choices l = (subs l) |> 
                 List.concatMap (\ll -> perms ll) 
 
--- split[1,2,3,4] => [([1],[2,3,4]),([1,2],[3,4]),([1,2,3],[4])]
+{-| -}
 split : List Int -> List((List Int ),(List Int ))
 split l = 
     case l of 
